@@ -189,7 +189,7 @@ def run(config: Config) -> None:
                 if modes.mode_of(ctx.mode).windowed:
                     # The loop owns the window, so it is the only caller that may forget
                     # a departed bird's artwork - the kiosk may be previewing another one.
-                    picks.retain(name for name, _ in source.species_since(settings.lookback_hours))
+                    picks.retain(name for name, _ in source.species_since(settings.window_hours()))
                 panel_image = dither(modes.render(ctx))
                 panel_image.save(config.output_path)
                 log.info("Rendered %s for the panel at %dx%d", ctx.mode, *size)
